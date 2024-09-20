@@ -1,0 +1,2 @@
+the root cause is misclassification of empty values; when tested it returns a "empty binary string" which doesn't make a lot of sense. 
+A potential patch would be check for empty values regardless of type.

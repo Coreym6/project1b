@@ -1,0 +1,2 @@
+The root cause stems from improper consideration for non-printable characters. When tested it outputed a stdout with the typical begin map structure.
+A possible solution would be to check control characters. 
