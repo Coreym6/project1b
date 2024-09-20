@@ -3,6 +3,7 @@ import random
 import string
 import base64
 import sys
+import time 
 
 def generate_random_input(prefix, length=10):
     #Generates a random input string by appending a random suffix to the specified prefix."""
@@ -13,6 +14,9 @@ def find_partial_sha256_collision(prefix, num_bytes=4, target_byte=b'\xAA'):
     #Finds two different inputs that result in SHA256 hashes with identical leading num_bytes where all bytes are the same value."""
     seen_hashes = {} # use of a dictionary to retain hashes we have seen before 
     attempts = 0
+    start_time = time.time() # start of run time. 
+    report_time = 600 # every ten minutes, print out the number of attempts
+    next_report = start_time + report_time # next time to report the number of attempts
 
     while True:
        
@@ -35,9 +39,12 @@ def find_partial_sha256_collision(prefix, num_bytes=4, target_byte=b'\xAA'):
         
         attempts += 1
 
-        # Output debug information to stderr every 100,000 attempts
-        if attempts % 100000 == 0:
-            print(f"Attempts: {attempts}", file=sys.stderr)
+        # Check if it's time to report the elapsed time and attempts
+        current_time = time.time()
+        if current_time >= next_report:
+            elapsed_time = current_time - start_time
+            print(f"Attempts: {attempts}, Time Elapsed: {elapsed_time / 60:.2f} minutes", file=sys.stderr)
+            next_report = current_time + report_time  # Schedule the next report
 
 # Main 
 if __name__ == "__main__":
