@@ -14,5 +14,5 @@ run:
 	@if [ ! -f 2-input.txt ]; then \
 		touch 2-input.txt; \
 	fi
-	@python3 src/SHA_test.py $(FILE) | head -n 1 >> ../1-input.txt
-	@python3 src/SHA_test.py $(FILE) | head -n 2 | tail -n 1 >> ../2-input.txt
+	@python3 src/SHA_test.py $(FILE) | head -n 1 >> 1-input.txt
+	@python3 src/SHA_test.py $(FILE) | head -n 2 | tail -n 1 >> 2-input.txt
